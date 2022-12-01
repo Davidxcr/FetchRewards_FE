@@ -30,7 +30,7 @@ const App = () => {
       errorMessage:
         "Full Name should be more than 3 characters and shouldn't include any special characters",
       label: "Full Name",
-      pattern: `^[A-Za-z0-9]{3,50}$`,
+      pattern: `^[A-Z a-z 0-9]{3,50}$`,
       required: true,
     },
     {
