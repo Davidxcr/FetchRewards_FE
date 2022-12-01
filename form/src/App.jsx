@@ -2,15 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import './components/formInput.css'
 import FormInput from './components/FormInput';
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import swal from 'sweetalert'
 
-const notify = () => {
-  toast("Custom Style Notification with css class!", {
-    position: toast.POSITION.BOTTOM_RIGHT,
-    theme: 'dark'
-  });
-}
 const App = () => {
   const [extData, setExtData] = useState({})
   const [values, setValues] = useState({
@@ -18,8 +11,8 @@ const App = () => {
     email: "",
     password: ""
   })
-  const [occupation, setOccupation] = useState("")
-  const [state, setState] = useState("")
+  const [occupation, setOccupation] = useState(" ")
+  const [state, setState] = useState(" ")
 
   useEffect(() => {
     fetch("https://frontend-take-home.fetchrewards.com/form")
@@ -58,24 +51,29 @@ const App = () => {
   ]
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (occupation === 'Select Occupation' || state === 'Select State') {
       alert('Choose a proper occupation and / or state');
+    } else {
+      const formInfo = { ...values, occupation, state }
+      console.log(formInfo)
+      fetch('https://frontend-take-home.fetchrewards.com/form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formInfo)
+      })
+        .then((response) => {
+          console.log(response.json())
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      setValues('');
+      setOccupation("")
+      setState("")
+      e.target.reset()
+      swal('Thank you for registering...')
     }
-    const formInfo = { ...values, occupation, state }
-    // console.log(formInfo)
-    fetch('https://frontend-take-home.fetchrewards.com/form', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formInfo)
-    })
-      .then((response) => {
-        console.log(response.json())
-        console.log("Here we go1")
-        notify()
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }
 
   const onChange = (e) => {

@@ -4,9 +4,10 @@
   justify-content: center;
   height: 100vh;
   background: linear-gradient(
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.2)
-  );
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.2)
+    ),
+    url("./img/fetchRewards.png");
   background-size: cover;
   background-position: center;
 }
