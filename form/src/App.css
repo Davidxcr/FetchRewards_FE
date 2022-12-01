@@ -4,10 +4,9 @@
   justify-content: center;
   height: 100vh;
   background: linear-gradient(
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url("./img/fetchRewards.png");
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.2)
+  );
   background-size: cover;
   background-position: center;
 }
@@ -21,6 +20,10 @@ form {
 h1 {
   color: rgb(35, 7, 42);
   text-align: center;
+}
+
+select:invalid ~ span {
+  display: block;
 }
 
 button {
