@@ -13,6 +13,8 @@ const App = () => {
   })
   const [occupation, setOccupation] = useState(" ")
   const [state, setState] = useState(" ")
+  const [focused, setFocused] = useState(false);
+
 
   useEffect(() => {
     fetch("https://frontend-take-home.fetchrewards.com/form")
@@ -28,6 +30,7 @@ const App = () => {
       placeholder: "Full Name",
       errorMessage: "Full Name should be more than 3 characters and shouldn't include any special characters",
       label: "Full Name",
+      pattern: `^[A-Za-z0-9]{3,50}$`,
       required: true
     },
     {
@@ -44,8 +47,9 @@ const App = () => {
       name: "password",
       type: "password",
       placeholder: "Password",
-      errorMessage: "Password should be minimum 8 characters",
+      errorMessage: "Password should be 8-20 characters with minimum 1 letter, 1 number and 1 special character",
       label: "Password",
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true
     }
   ]
@@ -80,6 +84,9 @@ const App = () => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
+  const handleFocus = (e) => {
+    setFocused(true);
+  };
   return <div className='app'>
     <form onSubmit={handleSubmit}>
       <h1>User Registration</h1>
@@ -100,6 +107,7 @@ const App = () => {
             const occupationSelect = e.target.value;
             setOccupation(occupationSelect)
           }}
+          onBlur={handleFocus} focused={focused.toString()}
         >
           <option className='option' value="" selected disabled>Select Occupation</option>
           {
@@ -119,6 +127,7 @@ const App = () => {
             const stateSelect = e.target.value;
             setState(stateSelect)
           }}
+          onBlur={handleFocus} focused={focused.toString()}
         >
           <option
             value=""

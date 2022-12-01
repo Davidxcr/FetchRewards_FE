@@ -23,7 +23,11 @@ h1 {
   text-align: center;
 }
 
-select:invalid ~ span {
+select:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+select:invalid[focused="true"] ~ span {
   display: block;
 }
 
