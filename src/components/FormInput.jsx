@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import "./formInput.css"
+import React, { useState } from "react";
+import "./formInput.css";
 
 const FormInput = (props) => {
-    const [focused, setFocused] = useState(false)
+    const [focused, setFocused] = useState(false);
 
-    const { label, errorMessage, onChange, id, ...inputProps } = props
+    const { label, errorMessage, onChange, id, ...inputProps } = props;
 
     const handleFocus = (e) => {
-        setFocused(true)
-    }
+        setFocused(true);
+    };
     return (
-        <div className='formInput'>
+        <div className="formInput">
             <label>{label}</label>
             <input
                 {...inputProps}
@@ -20,7 +20,7 @@ const FormInput = (props) => {
             />
             <span>{errorMessage}</span>
         </div>
-    )
-}
+    );
+};
 
-export default FormInput
+export default FormInput;
